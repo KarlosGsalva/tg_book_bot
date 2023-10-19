@@ -5,3 +5,4 @@ mypy_cache/
 venv/
 .idea/
 .vscode/
+for_exp.py
