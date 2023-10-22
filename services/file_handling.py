@@ -19,9 +19,18 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
         index -= 1
     return page_text[:index], len(page_text[:index])
 
+
 # Функция, формирующая словарь книги
 def prepare_book(path: str) -> None:
-    pass
+    with open(path, 'r', encoding='utf-8') as book_file:
+        text = book_file.read()
+
+    start, page_number = 0, 1
+    while start < len(text):
+        page_text, page_size = _get_part_text(text, start, PAGE_SIZE)
+        book[page_number] = page_text.lstrip()
+        start += page_size
+        page_number += 1
 
 
 # Вызов функции prepare_book для подготовки книги из текстового файла
