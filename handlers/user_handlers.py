@@ -4,7 +4,7 @@ from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import CallbackQuery, Message
 from database.database import user_dict_template, user_db
-from filters.filters import IsDigitCallbackData, IsDelBookmarkCallbackData
+from filters.filters import IsDigitCallbackData, IsDelBookmarkCallbackData, IsInlinebuttonWithSlash
 from keyboards.bookmarks_kb import create_bookmarks_keyboard, create_edit_keyboard
 from keyboards.pagination_kb import create_pagination_keyboard
 from lexicon.lexicon import LEXICON
@@ -95,7 +95,7 @@ async def process_forward_press(callback: CallbackQuery):
 
 
 # хэндлер для обработки инлайн-кнопки с номером текущей страницы и добавления ее в закладки
-@router.callback_query(lambda x: '/' in x.data and x.data.replace('/', '').isdigit())
+@router.callback_query(IsInlinebuttonWithSlash())
 async def process_page_press(callback: CallbackQuery):
     user_db[callback.from_user.id]['bookmarks'].add(user_db[callback.from_user.id]['page'])
     await callback.answer('Страница добавлена в закладки!')
