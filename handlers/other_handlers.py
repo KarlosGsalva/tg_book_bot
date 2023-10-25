@@ -5,11 +5,12 @@ from aiogram.utils.keyboard import ReplyKeyboardMarkup
 router = Router()
 
 
+# @router.message(F.from_user.id == 1074713049)
 @router.message(F.text == 'Создай кнопку start')
 async def to_create_start_button(message: Message):
-    if message.from_user.id == '1074713049':
+    if message.from_user.id == 1074713049:
         kb = [[KeyboardButton(text='/start')]]
-        keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True, one_time_keyboard=True)
+        keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
         await message.answer('Кнопка создана', reply_markup=keyboard)
     else:
         await message.answer(text='Это команда доступная только администраторам')
@@ -17,7 +18,7 @@ async def to_create_start_button(message: Message):
 
 @router.message(F.text == 'Удали клавиатуру')
 async def to_delete_keyboard(message: Message):
-    if message.from_user.id == '1074713049':
+    if message.from_user.id == 1074713049:
         await message.reply(text='Клавиатура удалена', reply_markup=ReplyKeyboardRemove())
     else:
         await message.answer(text='Это команда доступная только администраторам')
