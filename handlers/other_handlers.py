@@ -5,7 +5,6 @@ from aiogram.utils.keyboard import ReplyKeyboardMarkup
 router = Router()
 
 
-# @router.message(F.from_user.id == 1074713049)
 @router.message(F.text == 'Создай кнопку start')
 async def to_create_start_button(message: Message):
     if message.from_user.id == 1074713049:
